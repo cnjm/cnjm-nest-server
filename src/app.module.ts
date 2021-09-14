@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from './config/config.module';
@@ -36,5 +37,8 @@ export class AppModule {
   constructor(private readonly config: ConfigService) {
     AppModule.port = config.port;
     AppModule.bsUrl = config.bsUrl;
+  }
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('user');
   }
 }

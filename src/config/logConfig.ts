@@ -1,10 +1,16 @@
 import * as path from 'path';
 const baseLogPath = path.resolve(__dirname, '../../logs'); // 日志根目录，视情况而定，这里将于项目同级
 
+// development 时控制台打印
+const appenders =
+  process.env.NODE_ENV === 'development'
+    ? ['console', 'app', 'errors']
+    : ['app', 'errors'];
+
 const log4jsConfig = {
   appenders: {
     console: {
-      type: 'console', // 控制台打印
+      type: 'console',
     },
     access: {
       type: 'dateFile', // 写入按日期分类文件
@@ -54,11 +60,11 @@ const log4jsConfig = {
   },
   categories: {
     default: {
-      appenders: ['console', 'app', 'errors'],
+      appenders,
       level: 'DEBUG',
     },
-    info: { appenders: ['console', 'app', 'errors'], level: 'info' },
-    access: { appenders: ['console', 'app', 'errors'], level: 'info' },
+    info: { appenders, level: 'info' },
+    access: { appenders, level: 'info' },
     http: { appenders: ['access'], level: 'DEBUG' },
   },
   pm2: true, // pm2时
