@@ -32,7 +32,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
       url, // 错误的url地址
     };
     // 输出日志
-    Logger.error(JSON.stringify(errorResponse));
+    errorResponse.url !== '/favicon.ico' &&
+      Logger.error(JSON.stringify(errorResponse));
 
     // http状态码响应，没有就是500
     const status =
