@@ -2,6 +2,8 @@
 
 [nest_template](https://gitee.com/c_jiaming/nest_admin_server_template.git)
 
+[文章链接](https://blog.csdn.net/weixin_42998707/category_11219947.html)
+
 ## 安装依赖
 
 ```bash
